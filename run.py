@@ -69,7 +69,7 @@ def service():
 def my_link():
     bar = request.form['variable']
 
-    connection = pyhdb.connect(host = "cfgavsapp", port = 39015, user = "SYSTEM", password = "Om@ha13!")
+    connection = pyhdb.connect()
     
     cursor = connection.cursor()
     cursor.execute(("select jobname, sum(case when status ='F' then 1 else 0 end) as Success, sum(case when status ='A' then 1 else 0 end) as Fail  from P08_CAS_MLDATA.TBTCO where jobname ='{b}' group by jobname" ).format(b = bar))
@@ -385,7 +385,7 @@ def my_link():
 def get_jobs(key):
     bar = key
 
-    connection = pyhdb.connect(host = "cfgavsapp", port = 39015, user = "SYSTEM", password = "Om@ha13!")
+    connection = pyhdb.connect()
     
     cursor = connection.cursor()
     cursor.execute(("select jobname, sum(case when status ='F' then 1 else 0 end) as Success, sum(case when status ='A' then 1 else 0 end) as Fail  from P08_CAS_MLDATA.TBTCO where jobname ='{b}' group by jobname" ).format(b = bar))
@@ -1027,7 +1027,7 @@ def get_bcs(key):
 
     bcs_number = key
     
-    connection = pyhdb.connect(host = "cfgavsapp", port = 39015, user = "SYSTEM", password = "Om@ha13!")
+    connection = pyhdb.connect()
     
     cursor0 = connection.cursor()
     cursor0.execute(("select JOBNAME from P08_CAS_MLDATA.BCS_DATA where JOBNUM = '{bcs}'" ).format(bcs = bcs_number))
@@ -1359,7 +1359,7 @@ def all_results():
     funcgroup = request.form['Functionalgroup']
     funcarea = request.form['Functionalarea']
     
-    connection = pyhdb.connect(host = "cfgavsapp", port = 39015, user = "SYSTEM", password = "Om@ha13!")
+    connection = pyhdb.connect()
     
     cursor2 = connection.cursor()
     cursor2.execute(("select * from P08_CAS_MLDATA.BCS_DATA" ))
