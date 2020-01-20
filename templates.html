@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div class="w3-bar w3-section w3-black w3-card-4">
+    <a class="w3-bar-item w3-button w3-green w3-hover-red w3-padding-16" href="http://127.0.0.1:5000">Home</a>
+    <a class="w3-bar-item w3-button w3-hover-red w3-padding-16" href="http://127.0.0.1:5000/all">Filtering</a>
+    <a class="w3-bar-item w3-button w3-hover-red w3-padding-16" href="http://127.0.0.1:5000/individual">Individual Query</a>
+  </div>
+</div>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  table-layout: fixed; 
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  table-layout: fixed; 
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+html, body{
+    height:100%;
+    width:100%;
+    padding:0;
+    margin:0;
+    table-layout: fixed; 
+}
+</style>
+</head>
+<body>
+<table>
+<tr><th>Job Name: <form action="/get-jobs" method="POST"> <input name="variable"><input type="submit"></form></th>
+<th>BCS Number: <form action="/get-bcs" method="POST"> <input name="bcs"><input type="submit"></form></th>
+<th>Create ServiceNow ticket: <form action="/create-service" method="POST"><input type="submit" name="submit_button" value="Perform RPA"></form></th>
+<br></tr>
+
+<table style="width:90%">
+<tr><br>
+    <th>BCS Number: </th>
+     <th name="BID">{{BID}}</th>
+     <input type="hidden" name="BID" value="{{BID}}"/>
+</tr>
+<tr>
+    <th>Job Name: </th>
+     <th name="Jname">{{Jname}}</th>
+</tr>
+<tr>
+	<td>System Detected In</td>
+    <td name="SID">{{SID}}</td>
+    <input type="hidden" name="SID" value="{{SID}}"/>
+</tr>
+<tr>
+	<td>Frequency Detected</td>
+	<td></td>
+</tr>
+</table>
+
+
+<table style="width:90%">
+
+<h2> Tagged Jobs</h2>
+<tr>
+    <th>Job Name</th>
+    <th>Match %</th> 
+    <th>Pass % </th>
+</tr>
+<tr>
+	<td name="Jname">{{Jname}}</td>
+    <input type="hidden" name="Jname" value="{{Jname}} "/>
+    <td name="Match">{{Match}}</td>
+    <input type="hidden" name="Match" value="{{Match}}"/>
+    {%if pass_id == "100.0%"%}
+    <td bgcolor="#00FF00">{{pass_id}}</td>
+    {%elif pass_id != null%}
+    <td bgcolor="#FF0000">{{pass_id}}</td>
+    {%endif%}
+</tr>
+<tr>
+</tr>
+</table>
+
+<h2>Compliance and Performance Report</h2>
+
+<table style="width:90%">
+  <tr>
+    <th>Compliance Code</th>
+    <th>Compliance Description</th> 
+    <th>Compliance Score</th>
+  </tr>
+  <tr>
+    <td>C1</td>
+    <td>BCS Record is Active</td>
+    <input type="hidden" name="Status" value="{{Status}}"/>
+    {%if Status == "100%" %}
+    <td bgcolor="#00FF00">{{Status}}</td>
+    {%elif Status == "0%"%}
+    <td bgcolor="#FF0000">{{Status}}</td>
+    {%elif Status == "100.0%" %}
+    <td bgcolor="#00FF00">{{Status}}</td>
+    {%elif Status == "N/A"%}
+    <td bgcolor="#FF0000">{{Status}}</td>
+    {%elif Status == "0.0%"%}
+    <td bgcolor="#FF0000">{{Status}}</td>
+    {%endif%}
+  </tr>
+  <tr>
+    <td>C2</td>
+    <td>Job has been created by a firefigther ID</td>
+    <input type="hidden" name="FFID" value="{{FFID}}"/>
+    {%if FFID == "Compliant"%}
+    <td bgcolor="#00FF00">{{FFID}}</td>
+    {%elif FFID == "Non-compliant"%}
+    <td bgcolor="#FF0000">{{FFID}}</td>
+    {%elif FFID == "N/A"%}
+    <td bgcolor="#FF0000">{{FFID}}</td>
+    {%elif FFID == "No"%}
+    <td bgcolor="#FF0000">{{FFID}}</td>
+    {%elif FFID == "0"%}
+    <td bgcolor="#FF0000">{{FFID}}</td>
+    {%endif%}
+  </tr>
+  <tr>
+    <td>C3</td>
+    <td>Job Steps are configured to turn using SAPOP account</td>
+    <input type="hidden" name="SAPOP" value="{{SAPOP}}"/>
+    {%if SAPOP == "Compliant"%}
+    <td bgcolor="#00FF00">{{SAPOP}}</td>
+    {%elif SAPOP == "Non-compliant"%}
+    <td bgcolor="#FF0000">{{SAPOP}}</td>
+    {%elif SAPOP == "N/A"%}
+    <td bgcolor="#FF0000">{{SAPOP}}</td>
+    {%elif SAPOP == "No"%}
+    <td bgcolor="#FF0000">{{SAPOP}}</td>
+    {%elif SAPOP == "0"%}
+    <td bgcolor="#FF0000">{{SAPOP}}</td>
+    {%endif%}
+  </tr>
+</table>
+<br>
+
+<table style="width:90%">
+  <tr>
+    <th>Performance Code</th>
+    <th>Performance Description</th> 
+    <th>Performance Score</th>
+  </tr>
+  <tr>
+    <td>P1</td>
+    <td>Job Completion Rate</td>
+    <input type="hidden" name="Rate" value="{{Rate}}"/>
+    {%if Rate == "100.0%" %}
+    <td bgcolor="#00FF00">{{Rate}}</td>
+    {%elif Rate != null %}
+    <td bgcolor="##FF0000">{{Rate}}</td>
+    {%endif%}
+  </tr>
+  <tr>
+    <td>P2</td>
+    <td>Job Completion Higher than 80%</td>
+    <input type="hidden" name="Valid_rate" value="{{Valid_rate}}"/>
+    {%if Valid_rate == "Yes" %}
+    <td bgcolor="#00FF00">{{Valid_rate}}</td>
+    {%elif Valid_rate == "N/A"%}
+    <td bgcolor="#FF0000">{{Valid_rate}}</td>
+    {%elif Valid_rate == "No"%}
+    <td bgcolor="#FF0000">{{Valid_rate}}</td>
+    {%elif Valid_rate == "0"%}
+    <td bgcolor="#FF0000">{{Valid_rate}}</td>
+    {%endif%}
+  </tr>
+  <tr>
+    <td>P3</td>
+    <td>Average Runtime</td>
+    <td name="runtime">{{runtime}}</td>
+    <input type="hidden" name="runtime" value="{{runtime}}"/>
+  </tr>
+  <tr>
+    <td>P4</td>
+    <td>Runtime Trend</td>
+    <input type="hidden" name="x_runtime" value="{{x_runtime}}"/>
+    {%if "Runtime improvement efficiency is faster by:" in x_runtime %}
+    <td bgcolor="#00FF00">{{x_runtime}}</td>
+    {%elif "Runtime improvement efficiency is slower by:" in x_runtime %}
+    <td bgcolor="#FF0000">{{x_runtime}}</td>
+    {%elif x_runtime == "0.0%" %}
+    <td bgcolor="#FF0000">{{x_runtime}}</td>
+    {%elif x_runtime == "0%" %}
+    <td bgcolor="#FF0000">{{x_runtime}}</td>
+    {%elif x_runtime == "0" %}
+    <td bgcolor="#FF0000">{{x_runtime}}</td>
+    {%endif%}
+  </tr>
+</table>
+
+<h2>SNOW INCIDENTS</h2>
+
+
+</body>
+</html>

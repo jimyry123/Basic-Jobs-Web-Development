@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="w3-bar w3-section w3-black w3-card-4">
+    <a class="w3-bar-item w3-button w3-green w3-hover-red w3-padding-16" href="http://127.0.0.1:5000">Home</a>
+    <a class="w3-bar-item w3-button w3-hover-red w3-padding-16" href="http://127.0.0.1:5000/all">Filtering</a>
+    <a class="w3-bar-item w3-button w3-hover-red w3-padding-16" href="http://127.0.0.1:5000/individual">Individual Query</a>
+  </div>
+</div>
+<h2> Filter results</h2>
+<tr> <form action="/all-results" method="POST"><th>Status: <input name="status" id="status">
+<th>Projects:<input name="projects" id="projects">
+<th>Functional Group:<input name="Functionalgroup" id="Functionalgroup"> <th> Functional Area:<input name="Functionalarea" id="Functionalarea"><input type="submit"></form></th>
+</tr>
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<select id="status" size="13">
+  <option>New</option>
+  <option>Request Review and Approval to Production</option>
+  <option>Active</option>
+  <option>Pending Completion</option>
+  <option>Obsolete</option>
+  <option>Approved to Quality</option>
+  <option>Re-Submitted</option>
+  <option>Submitted</option>
+  <option>Pending Testing Activity in Quality</option>
+  <option>Rejected</option>
+  <option>Request Scheduler Review</option>
+  <option>Approved to Production</option>
+</select>
+
+<select id="projects" size="13">
+  <option>CIP</option>
+  <option>SiGFP</option>
+  <option>Varian</option>
+  <option>AGS</option>
+  <option>Maintenance</option>
+  <option>SSG</option>
+  <option>CRM Service 2016</option>
+  <option>Alzenau Web</option>
+  <option>Alzenau</option>
+  <option>SiGFP-Convert</option>
+  <option>AKT</option>
+  <option>PDC</option>
+  <option>SemiTool</option>
+  <option>Baccini</option>
+  <option>VSDO</option>
+  <option>Production</option>
+  <option>SAP Tech Upgrade 2012</option>
+</select>
+
+<select id="funcgroup" size="13">
+  <option>Sales and Service</option>
+  <option>Integration Finance</option>
+  <option>Materials Management</option>
+  <option>Manufacturing</option>
+  <option>Technical</option>
+  <option>Foundational Finance</option>
+  <option>ALZ TMC Materials Management</option>
+  <option>Engineering</option>
+  <option>Test</option>
+  <option>ALZ TMC Sales and Service</option>
+  <option>ALZ TMC Foundational Finance</option>
+  <option>ALZ Materials Management</option>
+  <option>ALZ TMC Quality Management</option>
+  <option>ALZ WEB Materials Management</option>
+  <option>ALZ WEB Foundational Finance</option>
+  <option>ALZ Foundational Finance</option>
+  <option>WEB METHODS</option>
+</select>
+
+<select id="funcarea" size="13">
+  <option>Parts Pricing</option>
+  <option>Business Planning</option>
+  <option>Supply Chain Management - Global Availability to Promise (GATP)</option>
+  <option>Logistics</option>
+  <option>Planning</option>
+  <option>Manufacturing</option>
+  <option>Purchasing</option>
+  <option>Middleware</option>
+  <option>Trade</option>
+  <option>Enterprise Data Management</option>
+  <option>Basis</option>
+  <option>BPC Corporate Planning</option>
+  <option>Operations Finance Integration</option>
+  <option>Security and Governance</option>
+  <option>Quality Management</option>
+  <option>AGS Finance Integration</option>
+  <option>Sales Finance Integration</option>
+  <option>Sales</option>
+  <option>Service</option>
+  <option>General Ledger and Business Consolidation Systems</option>
+  <option>Production Planning</option>
+  <option>Engineering</option>
+  <option>Fixed Assets</option>
+  <option>test</option>
+  <option>Variant Configuration</option>
+  <option>Sales and Marketing</option>
+  <option>Credit Collections and Tax</option>
+  <option>Accounts Payable</option>
+  <option>GL AP AR Reporting</option>
+  <option>PLM</option>
+  <option>Enterprise Data Warehouse</option>
+  <option>QandR for Design Manufacturing Service Vendors</option>
+  <option>Purchasing WM Inventory Shipping</option>
+  <option>Integration</option>
+  <option>Controlling</option>
+  <option>Human Resources</option>
+  <option>Development</option>
+  <option>Project Systems</option>
+  <option>Web Methods</option>
+  <option>Materials Integration</option>
+</select>
+
+
+<script>
+$("#status option").dblclick(function() {
+  $("#status").val($(this).html());
+});
+
+$("#projects option").dblclick(function() {
+  $("#projects").val($(this).html());
+});
+
+$("#funcgroup option").dblclick(function() {
+  $("#Functionalgroup").val($(this).html());
+});
+
+$("#funcarea option").dblclick(function() {
+  $("#Functionalarea").val($(this).html());
+});
+</script>
+
+
+</body>
+</html>
