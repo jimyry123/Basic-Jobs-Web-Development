@@ -701,7 +701,7 @@ def all_bcs():
 
     bcs_number = request.form['bcs']    
     
-    connection = pyhdb.connect(host = "cfgavsapp", port = 39015, user = "SYSTEM", password = "Om@ha13!")
+    connection = pyhdb.connect()
     
     cursor0 = connection.cursor()
     cursor0.execute(("select JOBNAME from P08_CAS_MLDATA.BCS_DATA where JOBNUM = '{bcs}'" ).format(bcs = bcs_number))
@@ -1447,7 +1447,7 @@ def all_results():
     bcs_number = []
 
     for bar in df4['new_jobs']:
-        connection = pyhdb.connect(host = "cfgavsapp", port = 39015, user = "SYSTEM", password = "Om@ha13!")
+        connection = pyhdb.connect()
     
         cursor = connection.cursor()
         cursor.execute(("select jobname, sum(case when status ='F' then 1 else 0 end) as Success, sum(case when status ='A' then 1 else 0 end) as Fail  from P08_CAS_MLDATA.TBTCO where jobname ='{b}' group by jobname" ).format(b = bar))
